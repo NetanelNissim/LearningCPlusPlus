@@ -2,10 +2,15 @@
 //
 
 #include "stdafx.h"
+#include <windows.h>
+#include <string.h>
 #include <iostream>
  
 using namespace std;
 
+string openfilename(char *filter = "All Files (*.*)\0*.*\0", HWND owner = NULL);
+
+int add(int x, int y); 
 
 int subtraction(int a, int b)
 {
@@ -23,51 +28,47 @@ void duplicate(int& a, int& b, int& c)
 
 int main()
 {
-	int x = 1, y = 3, z=7;
-	z = subtraction(7, 2);
-	cout << "The first result is "<< z << '\n';
-	cout << "The second result is " << subtraction(7, 2) << '\n';
-	cout << "The third result is " << subtraction(x, y) << '\n';
-	z = 4 + subtraction(x, y);
-	cout << "The fourth result is " << z << '\n';
-
-	z = 7;
-	duplicate(x, y, z);
-	cout << "x=" << x << ", y=" << y << ", z=" << z;
-	int num;
-	cout << "Enter Number:";
-	cin >> num;
-
-	if (num > 0)
+	int selection;
+	do
 	{
-		cout << "The Number > 0" << '\n'<< num;
-	}
-	else
-	{
-		cout << "Then Number < 0" << '\n' << num;
-	}
+		cout << "Main Menu\n\n";
+		cout << "Please make your selection\n";
+		cout << "1 - open file dialog\n";
+		cout << "2 - read text file\n";
+		cout << "3 - show text\n";
+		cout << "4 - Quit\n";
 
-	int n, fuctorial = 1;
-	
-	cout << "Enter Positive integer: ";
-	cin >> n;
-	for (int i = 1; i <= n; ++i)
-	{
-		fuctorial *= i;
-	}
-		
-	cout << "Facturial of " << n << " = " << fuctorial << '\n';
-	
-	int max[9] = { 1,2,100,4,5,6,500,8,9 };
-	int resultMax =0;
-	for (int i = 0; i < 9;i++)
-	{
-		if (resultMax < max[i]) resultMax = max[i];
-	}
+		cout << "Selection: ";
+		cin >> selection;
 
-	cout << "The Max Number is: " << resultMax << '\n';
-	char temp;
-	cin >> temp;
+		switch (selection) {
+		case 1:
+			cout << "open file dialog\n";
+			cout << openfilename().c_str();
+			break;
+		case 2:
+			cout << "read text file\n";
+			break;
+		case 3:
+			cout << "show text\n";
+			break;
+		case 4:
+			cout << "Goodbye!\n";
+			break;
+		default:
+			cout << "Main Menu\n\n";
+			cout << "Please make your selection\n";
+			cout << "1 - open file dialog\n";
+			cout << "2 - read text file\n";
+			cout << "3 - show text\n";
+			cout << "4 - Quit\n";
+			cout << "Selection: ";
+			cin >> selection;
+		}
+	} while (selection != 4);
+
+
+	cin.get();
 	return 0;
 }
 
