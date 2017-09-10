@@ -2,13 +2,17 @@
 //
 
 #include "stdafx.h"
+#include "OpenFile.h"
 #include <windows.h>
-#include <string.h>
+#include <string>
 #include <iostream>
+#include <fstream>
+#include <iomanip>
  
 using namespace std;
 
 string openfilename(char *filter = "All Files (*.*)\0*.*\0", HWND owner = NULL);
+string GetFileName(const string & prompt);
 
 int add(int x, int y); 
 
@@ -28,7 +32,20 @@ void duplicate(int& a, int& b, int& c)
 
 int main()
 {
-	int selection;
+	string fname = GetFileName("Number which file: ");
+	ifstream ifs(fname.c_str());
+	if (!ifs.is_open()) {
+		cerr << "cannot open " << fname << " for input" << endl;
+	}
+	else {
+		string line;
+		int lineno = 1;
+		while (getline(ifs, line)) {
+			cout << setw(5) << right << lineno++ << " : " << line << "\n";
+		}
+	}
+
+	/*int selection;
 	do
 	{
 		cout << "Main Menu\n\n";
@@ -44,7 +61,6 @@ int main()
 		switch (selection) {
 		case 1:
 			cout << "open file dialog\n";
-			cout << openfilename().c_str();
 			break;
 		case 2:
 			cout << "read text file\n";
@@ -67,7 +83,7 @@ int main()
 		}
 	} while (selection != 4);
 
-
+	*/
 	cin.get();
 	return 0;
 }
