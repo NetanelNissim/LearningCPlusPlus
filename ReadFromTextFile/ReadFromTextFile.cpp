@@ -11,41 +11,16 @@
  
 using namespace std;
 
-string openfilename(char *filter = "All Files (*.*)\0*.*\0", HWND owner = NULL);
-string GetFileName(const string & prompt);
-
-int add(int x, int y); 
-
-int subtraction(int a, int b)
-{
-	int r;
-	r = a - b;
-	return r;
-}
-
-void duplicate(int& a, int& b, int& c)
-{
-	a *= 2;
-	b *= 2;
-	c *= 2;
-}
+ifstream GetFileName(const string  prompt);
 
 int main()
 {
-	string fname = GetFileName("Number which file: ");
-	ifstream ifs(fname.c_str());
-	if (!ifs.is_open()) {
-		cerr << "cannot open " << fname << " for input" << endl;
-	}
-	else {
-		string line;
-		int lineno = 1;
-		while (getline(ifs, line)) {
-			cout << setw(5) << right << lineno++ << " : " << line << "\n";
-		}
-	}
+	ifstream fin;
+	string fileName;
+	string line;
+    string prompt;
 
-	/*int selection;
+	int selection;
 	do
 	{
 		cout << "Main Menu\n\n";
@@ -60,16 +35,27 @@ int main()
 
 		switch (selection) {
 		case 1:
-			cout << "open file dialog\n";
+			cout << "Enter File Name:" << endl;
+			cin >> prompt;
+		    fin= GetFileName(prompt);
+			if (!fin.good()) {
+			  cout << "Couldn’t open the file Or wrong file name!! " << endl;
+			}
 			break;
 		case 2:
-			cout << "read text file\n";
+			if (prompt.empty()) { cout << " Mast 1 - open file dialog!!! " << endl; break; }
+			while (getline(fin, line))
+			{
+				line +=line;
+			}
+			fin.close();
 			break;
 		case 3:
-			cout << "show text\n";
+			if (line.empty()) { cout << " Mast 2 - read text file!!! " << endl; break; }
+			cout << line << endl;
 			break;
 		case 4:
-			cout << "Goodbye!\n";
+			cout << "Goodbye!"<< endl;
 			break;
 		default:
 			cout << "Main Menu\n\n";
@@ -83,7 +69,8 @@ int main()
 		}
 	} while (selection != 4);
 
-	*/
+	cin.get();
+
 	cin.get();
 	return 0;
 }
