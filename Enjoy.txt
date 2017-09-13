@@ -1,0 +1,5 @@
+13-09-2017
+----------
+1) Function is called GetFileName(), but actually it does something different
+2) Implement an object in separate CPP (FileReader) that does ALL file handling (open, close, data holder, ...)
+3) Implement an exception class in separate CPP, which inherits from std::exception and does all FileReader error handling
