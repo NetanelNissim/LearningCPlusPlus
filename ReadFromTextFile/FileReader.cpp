@@ -1,37 +1,23 @@
 #include "stdafx.h"
 #include "FileReader.h"
-#include <windows.h>
-//#include <string.h>
-#include <iostream>
-#include <fstream>
-#include <string>
-#include <iomanip>
 
-using namespace std;
-
-
-string GetFileName()
+CFileReader::CFileReader(const std::string &path)
 {
-	string prompt;
-	cout << "Enter File Name:" << endl;
-	cin >> prompt;
-	return prompt;
+	m_File.open(path, std::ifstream::in);
+	
+	if (!m_File.is_open())
+		throw std::exception("Can't open file");
 }
 
-ifstream GetFile(const string  prompt) {
-	ifstream fin;
-	fin.open(prompt.c_str(), ios::in);
-	return fin;
-}
-
-string ReadFile(ifstream &fin)
+CFileReader::~CFileReader()
 {
-	string line;
-	while (getline(fin, line))
-	{
-		line += line;
-	}
-	fin.close();
-
-	return line;
+	m_File.close();
 }
+
+std::string CFileReader::ReadFile()
+{
+	std::string data;
+	return data.assign(std::istreambuf_iterator<char>(m_File), std::istreambuf_iterator<char>());
+}
+
+

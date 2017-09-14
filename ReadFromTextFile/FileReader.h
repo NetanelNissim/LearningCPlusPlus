@@ -1,7 +1,15 @@
 #pragma once
-//#include <stdio.h>
-//#include <tchar.h>
 
+#include <fstream>
 
+class CFileReader
+{
+private:
+	std::ifstream m_File;
+public:
+	CFileReader(const std::string &path);
+	virtual ~CFileReader();
 
-// TODO: reference additional headers your program requires here
+	std::string ReadFile();
+};
+
