@@ -3,3 +3,12 @@
 1) Function is called GetFileName(), but actually it does something different
 2) Implement an object in separate CPP (FileReader) that does ALL file handling (open, close, data holder, ...)
 3) Implement an exception class in separate CPP, which inherits from std::exception and does all FileReader error handling
+
+18-09-2017
+----------
+1) Create new file called Shapes.cpp
+2) Implement abstract interface called IShape, which has a method GetArea()
+3) Implement CCircle class based on IShape which implemets his area calculation
+4) Implement CRectangle class based on IShape which implemets his area calculaton
+5) Add additional member methods or variables as needed.
+6) Go for it!
